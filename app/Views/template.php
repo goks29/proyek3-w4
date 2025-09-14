@@ -14,13 +14,29 @@
 <body>
 
     <div class="header">
-        <h2>My Website</h2>
+        <?php
+        $session = session();
+        if($session->get('role') == "admin"): 
+        ?>
+            <h2>Admin Dashboard</h2>
+        <?php else:?>
+            <h2>Mahasiswa Dashboard</h2>
+        <?php endif?>
     </div>
 
     <div class="menu">
         <a href="<?= base_url('/') ?>">Home</a>
-        <a href="<?= base_url('Berita') ?>">Berita</a>
-        <a href="<?= base_url('DisplayMahasiswa')?>">Mahasiswa</a>
+
+        <?php
+        $session = session();
+        if ($session->get('role') == 'admin'):
+        ?>
+            <a href="<?= base_url('admin/manage_mahasiswa')?>">Manajemen Mahasiswa</a>
+            <a href="<?= base_url('admin/manage_courses')?>">Manajemen Mata Kuliah</a>
+        <?php else:?>
+            <a href="<?= base_url('mahasiswa/courses')?>">Ambil Mata Kuliah</a>
+            <a href="<?= base_url('DisplayMahasiswa')?>">Lihat Mahasiswa</a>
+        <?php endif?>
         <a href="<?= base_url('logout')?>">Logout</a>
     </div>
 

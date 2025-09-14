@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\MahasiswaModel;
 
-class DMahasiswa extends BaseController
+class DisplayMahasiswa extends BaseController
 {
     public function index()
     {

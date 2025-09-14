@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminModel;
+use App\Models\UserModel;
 
 class Auth extends BaseController
 {
@@ -24,37 +24,51 @@ class Auth extends BaseController
                 ]
             ],
             'password' => [
-                'rules'  => 'required|min_length[5]',
+                'rules'  => 'required|min_length[8]',
                 'errors' => [
                     'required'   => 'Password wajib diisi.',
-                    'min_length' => 'Password minimal 5 karakter.'
+                    'min_length' => 'Password minimal 8 karakter.'
                 ]
             ]
         ];
 
-        if (! $this->validate($validationRules)) {
+        if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $adminModel = new AdminModel();
+        $UserModel = new UserModel();
 
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
         //cek username
-        $admin = $adminModel->where('username',$username)->first();
+        $user = $UserModel->where('username',$username)->first();
 
-        if($admin)
+        if($user)
         {
-            if(md5($password) === $admin['password']) {
+            if(md5($password) === $user['password']) {
                 //set session
-                $session->set(['admin_id' => $admin['id'], 'username' => $admin['username'], 'logged_in' => true]);
-                return redirect()->to('/');
+                $sessionData = [
+                    'id' => $user['user_id'],
+                    'username' => $user['username'],
+                    'role' => $user['role'],
+                    'logged_in' => true
+                ];
+                
+                $session->set($sessionData);
+
+                //cek peran
+
+                if($session->get('role') == 'admin') {
+                    return redirect()->to('/admin/dashboard');
+                } else {
+                    return redirect()->to('/mahasiswa/dashboard');
+                }
             } else {
                 return redirect()->back()->with('error', 'Password Salah!');
             }
         } else {
-            return redirect()->back()->with('error', 'Username salah!');
+            return redirect()->back()->with('error', 'Username tidak ditemukan!');
         }
     }
 
