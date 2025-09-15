@@ -3,6 +3,8 @@
 <head></head>
 <body>
     <h3>Daftar Mahasiswa</h3>
+    <a href="<?= base_url('admin/manage_mahasiswa/new') ?>">Tambah Mahasiswa</a>
+    <br><br>
     <table border="1" cellpading="5" width="100%">
         <thead>
             <tr>
@@ -16,9 +18,9 @@
             <?php if(!empty($mahasiswa) && is_array($mahasiswa)): ?>
                 <?php foreach ($mahasiswa as $mhs): ?> 
                     <tr>
-                        <td><? esc($mhs['id'])?></td>
-                        <td><? esc($mhs['username'])?></td>
-                        <td><? esc($mhs['role'])?></td>
+                        <td><?= esc($mhs['id'])?></td>
+                        <td><?= esc($mhs['username'])?></td>
+                        <td><?= esc($mhs['role'])?></td>
                         <td>
                             <a href="#">edit</a> | <a href="#">delete</a>
                         </td>

@@ -18,12 +18,20 @@ $routes->setAutoRoute(false);
 $routes->get('/admin/dashboard', 'adminController::dashboard', ['filter' => 'admin']);
 $routes->get('/admin/manage_mahasiswa', 'AdminController::manageMahasiswa', ['filter' => 'admin']);
 $routes->get('/admin/manage_courses', 'AdminController::manageCourses', ['filter' => 'admin']);
+$routes->get('/admin/manage_courses/new', 'AdminController::newCourse', ['filter' => 'admin']);
+$routes->post('/admin/manage_courses/store', 'AdminController::storeCourse', ['filter' => 'admin']);
+$routes->get('/admin/manage_courses/edit/(:num)', 'AdminController::editCourse/$1', ['filter' => 'admin']);
+$routes->post('/admin/manage_courses/update/(:num)', 'AdminController::updateCourse/$1', ['filter' => 'admin']);
+$routes->get('/admin/manage_courses/delete/(:num)', 'AdminController::deleteCourse/$1', ['filter' => 'admin']);
+$routes->get('/admin/manage_mahasiswa/new', 'AdminController::newMahasiswa', ['filter' => 'admin']);
+$routes->post('/admin/manage_mahasiswa/store', 'AdminController::storeMahasiswa', ['filter' => 'admin']);
 
 //routes mahasiswa
-$routes->get('/mahasiswa/dashboard', 'mahasiswaController::dashboard', ['filter' => 'auth']);
-$routes->get('/mahasiswa/courses', 'mahasiswaController::mahasiswaCourses', ['filter' => 'auth']);
-$routes->get('/DisplayMahasiswa', 'DisplayMahasiswa::index',['filter' => 'auth']);
-$routes->get('/DisplayMahasiswa/detail/(:num)', 'DisplayMahasiswa::detail/$1',['filter' => 'auth']);
+$routes->get('/mahasiswa/dashboard', 'MahasiswaController::dashboard', ['filter' => 'auth']);
+$routes->get('/mahasiswa/courses', 'MahasiswaController::mahasiswaCourses', ['filter' => 'auth']);
+$routes->get('/mahasiswa/enroll/(:num)', 'MahasiswaController::enroll/$1', ['filter' => 'auth']);
+
+
 
 //routes login
 $routes->get('/login', 'Auth::login');

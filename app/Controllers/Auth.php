@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\TakesModel;
 
 class Auth extends BaseController
 {
@@ -37,6 +38,7 @@ class Auth extends BaseController
         }
 
         $UserModel = new UserModel();
+        $TakesModel = new TakesModel();
 
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
@@ -49,12 +51,17 @@ class Auth extends BaseController
             if(md5($password) === $user['password']) {
                 //set session
                 $sessionData = [
-                    'id' => $user['user_id'],
-                    'username' => $user['username'],
-                    'role' => $user['role'],
-                    'logged_in' => true
+                    'id'         => $user['id'],
+                    'username'   => $user['username'],
+                    'role'       => $user['role'],
+                    'full_name'  => $user['full_name'],
+                    'logged_in'  => true,
                 ];
                 
+                if ($user['role'] === 'mahasiswa') {
+                        $sessionData['student_id'] = $user['id'];
+                    }
+
                 $session->set($sessionData);
 
                 //cek peran
