@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
-<head></head>
-<body>
-    <h3>Daftar Mata Kuliah</h3>
-    <a href="<?= base_url('/admin/manage_courses/new') ?>">Tambah Course</a>
-    <br><br>
-    <table border="1" cellpading="5" width="100%">
-        <thead>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manajemen Mata Kuliah</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container my-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Daftar Mata Kuliah</h3>
+        <a href="<?= base_url('/admin/manage_courses/new') ?>" class="btn btn-success">Tambah Course</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Mata Kuliah</th>
                 <th>SKS</th>
                 <th>Action</th>
@@ -22,18 +29,20 @@
                         <td><?= esc($course['course_name'])?></td>
                         <td><?= esc($course['credits'])?></td>
                         <td>
-                            <a href="<?= base_url('admin/manage_courses/edit/' . $course['id'])?>">edit</a> |
-                            <a href="<?= base_url('admin/manage_courses/delete/' . $course['id'])?>"
-                            onclick="return confirm('apakah anda yakin akan mengahapus Mata Kuliah ini?')">delete</a>
+                            <a href="<?= base_url('admin/manage_courses/edit/' . $course['id'])?>" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="<?= base_url('admin/manage_courses/delete/' . $course['id'])?>" 
+                               onclick="return confirm('Apakah anda yakin akan menghapus Mata Kuliah ini?')" 
+                               class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else:?>
                 <tr>
-                    <td colspan="4">Belum ada data mata kuliah</td>
+                    <td colspan="4" class="text-center">Belum ada data mata kuliah</td>
                 </tr>
             <?php endif; ?>
         </tbody>
     </table>
+
 </body>
 </html>

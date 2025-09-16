@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head></head>
-<body>
-    <h3>Daftar Mahasiswa</h3>
-    <a href="<?= base_url('admin/manage_mahasiswa/new') ?>">Tambah Mahasiswa</a>
-    <br><br>
-    <table border="1" cellpading="5" width="100%">
-        <thead>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manajemen Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container my-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Daftar Mahasiswa</h3>
+        <a href="<?= base_url('admin/manage_mahasiswa/new') ?>" class="btn btn-success">Tambah Mahasiswa</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Username</th>
                 <th>Role</th>
-                <th>Nama Lengkap`</th>
+                <th>Nama Lengkap</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -24,18 +31,20 @@
                         <td><?= esc($mhs['role'])?></td>
                         <td><?= esc($mhs['full_name'])?></td>
                         <td>
-                            <a href="<?= base_url('admin/manage_mahasiswa/edit/' . $mhs['id'])?>">edit</a> |
-                            <a href="<?= base_url('admin/manage_mahasiswa/delete/' . $mhs['id'])?>"
-                            onclick="return confirm('apakah anda yakin akan mengahapus Mahasiswa ini?')">delete</a>
+                            <a href="<?= base_url('admin/manage_mahasiswa/edit/' . $mhs['id'])?>" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="<?= base_url('admin/manage_mahasiswa/delete/' . $mhs['id'])?>" 
+                               onclick="return confirm('Apakah anda yakin akan menghapus Mahasiswa ini?')" 
+                               class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else:?>
                 <tr>
-                    <td colspan="4">Belum ada data mahasiswa</td>
+                    <td colspan="5" class="text-center">Belum ada data mahasiswa</td>
                 </tr>
             <?php endif; ?>
         </tbody>
     </table>
+
 </body>
 </html>

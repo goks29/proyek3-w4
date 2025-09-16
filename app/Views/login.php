@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
 
-    <h2>Login</h2>
+    <div class="card shadow-sm p-4" style="width: 400px;">
+        <h3 class="text-center mb-3">Login</h3>
 
-    <?php if (session()->getFlashdata('error')): ?>
-        <p><?= session()->getFlashdata('error') ?></p>
-    <?php endif; ?>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+        <?php endif; ?>
 
-    <?php if (session()->getFlashdata('errors')): ?>
-        <ul>
-            <?php foreach (session()->getFlashdata('errors') as $error): ?>
-                <li><?= esc($error) ?></li>
-            <?php endforeach ?>
-        </ul>
-    <?php endif; ?>
+        <?php if (session()->getFlashdata('errors')): ?>
+            <div class="alert alert-warning">
+                <ul class="mb-0">
+                    <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                        <li><?= esc($error) ?></li>
+                    <?php endforeach ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-    <form method="post" action="<?= base_url('/processLogin') ?>">
-        <p>
-            <label>Username</label><br>
-            <input type="text" name="username" value="<?= old('username') ?>">
-        </p>
-        <p>
-            <label>Password</label><br>
-            <input type="password" name="password">
-        </p>
-        <button type="submit">Login</button>
-    </form>
+        <form method="post" action="<?= base_url('/processLogin') ?>">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" value="<?= old('username') ?>" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
 
 </body>
 </html>

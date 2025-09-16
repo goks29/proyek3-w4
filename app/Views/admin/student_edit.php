@@ -1,29 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Edit Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h3>Edit Mahasiswa</h3>
-    <br>
+<body class="container my-4">
+
+    <h3 class="mb-4">Edit Mahasiswa</h3>
+
     <form method="post" action="<?= base_url('admin/manage_mahasiswa/update/' . $user['id'])?>">
-        <p>    
-            <label>Username</label>
-            <input type="text" name="username" size="50" value="<?= esc($user['username'])?>" required>
-        </p>
-        <p>
-            <label>Password</label>
-            <input type="text" name="password" size="50" required>
-        </p>
-        <p>
-            <label>Nama Lengkap</label>
-            <input type="text" name="full_name" size="50" value="<?= esc($user['full_name'])?>" required>
-        </p>
-        <p>
-            <label>Tanggal Masuk</label>
-            <input type="date" name="entry_year" size="50" value="<?= esc($student['entry_year'])?>" required>
-        </p>
-        <button type="submit">Update</button>
-        <a href="<?= base_url('admin/manage_mahasiswa')?>">Batal</a>
+        
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                class="form-control" 
+                value="<?= esc($user['username'])?>" 
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input 
+                type="text" 
+                id="password" 
+                name="password" 
+                class="form-control" 
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="full_name" class="form-label">Nama Lengkap</label>
+            <input 
+                type="text" 
+                id="full_name" 
+                name="full_name" 
+                class="form-control" 
+                value="<?= esc($user['full_name'])?>" 
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="entry_year" class="form-label">Tanggal Masuk</label>
+            <input 
+                type="date" 
+                id="entry_year" 
+                name="entry_year" 
+                class="form-control" 
+                value="<?= esc($student['entry_year'])?>" 
+                required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="<?= base_url('admin/manage_mahasiswa')?>" class="btn btn-secondary">Batal</a>
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
