@@ -63,7 +63,22 @@ class Auth extends BaseController
                     }
 
                 $session->set($sessionData);
+                
+                //cek apakah ada redirect_url di session
+                $redirectUrl = $session->get('redirect_url');
+                if ($redirectUrl) {
+                    $session->remove('redirect_url'); 
 
+                    //kalau role admin tapi redirect bukan /admin
+                    if ($session->get('role') === 'admin' && strpos($redirectUrl, '/admin') === 0) {
+                        return redirect()->to($redirectUrl);
+                    }
+
+                    //kalau role mahasiswa tapi redirect bukan /mahasiswa
+                    if ($session->get('role') === 'mahasiswa' && strpos($redirectUrl, '/mahasiswa') === 0) {
+                        return redirect()->to($redirectUrl);
+                    }
+                }
                 //cek peran
 
                 if($session->get('role') == 'admin') {
