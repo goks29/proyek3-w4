@@ -58,13 +58,66 @@ class AdminController extends BaseController
         $userModel->insert($data);
 
         $userId = $userModel->getInsertID();
-
+        // dd($userId);
         $studentModel->insert([
-            'id' => $userId,
+            'student_id' => $userId,
             'entry_year' => $this->request->getPost('entry_year') 
         ]);
 
         return redirect()->to(base_url('admin/manage_mahasiswa'))->with('message', 'Mahasiswa berhasil ditambahkan!');
+    }
+
+    public function editMahasiswa($id)
+    {
+        $userModel = new UserModel();
+        $studentModel = new StudentModel();
+
+        $user = $userModel->find($id);
+        $student = $studentModel->where('student_id', $id)->first();
+
+        $data = [
+            'title'    => 'Edit Mahasiswa',
+            'content'  => view('admin/student_edit', ['user' => $user, 'student' => $student])
+        ];
+
+        return view('template', $data);
+    }
+
+    public function updateMahasiswa($id)
+    {
+        $userModel = new UserModel();
+        $studentModel = new StudentModel();
+
+        $password = $this->request->getPost('password');
+        $hashedPass = md5($password);
+
+        $userData = [
+            'username'    => $this->request->getPost('username'),
+            'full_name'   => $this->request->getPost('full_name'),
+        ];
+
+        if (!empty($password)) {
+            $userData['password'] = $hashedPass;
+        }
+
+        $studentData = [
+            'entry_year'    => $this->request->getPost('entry_year'),
+        ];
+
+        $userModel->update($id, $userData);
+
+        $studentModel->where('student_id',$id)->set($studentData)->update();
+
+        return redirect()->to(base_url('admin/manage_mahasiswa'));
+    }
+
+    public function deleteMahasiswa($id)
+    {
+        $userModel = new UserModel();
+
+        $userModel->delete($id);
+
+        return redirect()->to(base_url('admin/student_courses'))->with('success', 'Mahasiswa berhasil dihapus');
     }
 
     public function manageCourses()

@@ -5,6 +5,6 @@ use CodeIgniter\Model;
 class StudentModel extends Model 
 {
     protected $table      = 'students';   // tabel di database
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['id','entry_year'];
+    protected $primaryKey = 'student_id';
+    protected $allowedFields = ['student_id','entry_year'];
 }

@@ -42,7 +42,6 @@
             <a href="<?= base_url('admin/manage_courses')?>">Manajemen Mata Kuliah</a>
         <?php else:?>
             <a href="<?= base_url('mahasiswa/courses')?>">Ambil Mata Kuliah</a>
-            <a href="<?= base_url('DisplayMahasiswa')?>">Lihat Mahasiswa</a>
         <?php endif?>
         <a href="<?= base_url('logout')?>">Logout</a>
     </div>

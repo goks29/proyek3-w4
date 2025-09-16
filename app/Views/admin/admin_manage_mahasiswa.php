@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Username</th>
                 <th>Role</th>
+                <th>Nama Lengkap`</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -21,8 +22,11 @@
                         <td><?= esc($mhs['id'])?></td>
                         <td><?= esc($mhs['username'])?></td>
                         <td><?= esc($mhs['role'])?></td>
+                        <td><?= esc($mhs['full_name'])?></td>
                         <td>
-                            <a href="#">edit</a> | <a href="#">delete</a>
+                            <a href="<?= base_url('admin/manage_mahasiswa/edit/' . $mhs['id'])?>">edit</a> |
+                            <a href="<?= base_url('admin/manage_mahasiswa/delete/' . $mhs['id'])?>"
+                            onclick="return confirm('apakah anda yakin akan mengahapus Mahasiswa ini?')">delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -18,8 +18,8 @@ class CreateStudentsTable extends Migration
                 'type'       => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addKey('student_id', true);
+        $this->forge->addForeignKey('student_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('students');
     }
 

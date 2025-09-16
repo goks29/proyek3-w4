@@ -9,9 +9,11 @@ class MahasiswaController extends BaseController
 {
     public function dashboard()
     {
+        $takesModel = new TakesModel();
         $data = [
             'title' => 'Mahasiswa',
-            'content' => view('mahasiswa/mahasiswa_dashboard')
+            'content' => view('mahasiswa/mahasiswa_dashboard',
+            ['takes' => $takesModel->findAll()])
         ];
 
         return view('template', $data);
@@ -19,11 +21,22 @@ class MahasiswaController extends BaseController
 
     public function mahasiswaCourses()
     {
+        $session = session();
+        $student_id = $session->get('student_id');
+
+        $takesModel = new TakesModel();
         $courseModel = new CourseModel();
+
+        $courses = $courseModel->findAll();
+
+        $takenCourses = $takesModel->where('student_id', $student_id)->findAll();
+        $takenCoursesId = array_column($takenCourses, 'course_id');
+
         $data = [
             'title' => 'Mahasiswa Courses',
-            'content' => view('mahasiswa/mahasiswa_courses', 
-            ['courses' => $courseModel->findAll()])
+            'content' => view('mahasiswa/mahasiswa_courses', [
+                'courses'        => $courses,
+                'takenCoursesId'  => $takenCoursesId])
         ];
 
         return view('template', $data);

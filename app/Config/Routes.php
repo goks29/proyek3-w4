@@ -25,6 +25,9 @@ $routes->post('/admin/manage_courses/update/(:num)', 'AdminController::updateCou
 $routes->get('/admin/manage_courses/delete/(:num)', 'AdminController::deleteCourse/$1', ['filter' => 'admin']);
 $routes->get('/admin/manage_mahasiswa/new', 'AdminController::newMahasiswa', ['filter' => 'admin']);
 $routes->post('/admin/manage_mahasiswa/store', 'AdminController::storeMahasiswa', ['filter' => 'admin']);
+$routes->get('/admin/manage_mahasiswa/edit/(:num)', 'AdminController::editMahasiswa/$1', ['filter' => 'admin']);
+$routes->post('/admin/manage_mahasiswa/update/(:num)', 'AdminController::updateMahasiswa/$1', ['filter' => 'admin']);
+$routes->get('/admin/manage_mahasiswa/delete/(:num)', 'AdminController::deleteMahasiswa/$1', ['filter' => 'admin']);
 
 //routes mahasiswa
 $routes->get('/mahasiswa/dashboard', 'MahasiswaController::dashboard', ['filter' => 'auth']);
@@ -34,6 +37,7 @@ $routes->get('/mahasiswa/enroll/(:num)', 'MahasiswaController::enroll/$1', ['fil
 
 
 //routes login
+$routes->get('/', 'Auth::login');
 $routes->get('/login', 'Auth::login');
 $routes->post('/processLogin', 'Auth::processLogin');
 $routes->get('/logout', 'Auth::logout');
