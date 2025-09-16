@@ -17,6 +17,12 @@ class Auth implements FilterInterface
             ->setStatusCode(401)
             ->setBody(view('errors/custom/401'));
         }   
+
+        if ($session->get('role') != 'mahasiswa') {
+            return service('response')
+                ->setStatusCode(403)
+                ->setBody(view('errors/custom/403_admin'));
+        }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
